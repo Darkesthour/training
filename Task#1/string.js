@@ -60,6 +60,15 @@
 		return str.charAt(0) === symbol;
 	}
 
+	// Check for Camel Case
+	function isCamelCase(str) {
+		if (typeof str != 'string') return;
+
+		var matcher = str.match(/^[a-zA-Z]*[A-Z][a-zA-Z0-9]*$/);
+
+		return matcher != null;
+	}
+
 	// Tests
 	// -- Reverse
 	console.log('Testing ---> Reverse');
@@ -81,4 +90,14 @@
 	console.log(endsWith(null, null));
 	console.log(endsWith('A7x', 'X'));
 	console.log(endsWith('A7x', 'x'));
+
+	// -- Camel case
+	console.log('\nTesting ---> Camel case');
+	console.log(isCamelCase('Some_Class'));
+	console.log(isCamelCase('SomeClass'));
+	console.log(isCamelCase('someMethod'));
+	console.log(isCamelCase('variable'));
+	console.log(isCamelCase('very_long_name'));
+	console.log(isCamelCase(''));
+	console.log(isCamelCase('B'));
 })();
