@@ -31,6 +31,19 @@
 		});
 	}
 
+	function reverseStringV2(str) {
+		if (typeof str != 'string') return;
+		if (!str.length) return str;
+
+		var strToArr = str.split('');
+
+		strToArr.reverse();
+
+		return strToArr.reduce(function(res, cur){
+			return res + cur;
+		});
+	}
+
 	// Ends with
 	function endsWith(str, symbol) {
 		if (typeof str != 'string') return;
@@ -54,6 +67,7 @@
 	console.log(reverseString(''));
 	console.log(reverseString('A7X'));
 	console.log(reverseString());
+	console.log(reverseStringV2('Crazy Town'));
 
 	// -- Starts with
 	console.log('\nTesting ---> Start with')
