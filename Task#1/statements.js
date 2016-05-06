@@ -27,6 +27,7 @@
 	// CommaColonSON
 	function commaColonSON(str) {
 		if (typeof str != 'string') return;
+		if (!str.length) return;
 
 		var res = {},
 			nextRow,
@@ -47,7 +48,29 @@
 			ptrn = /(\w+)(:.+|,\w+)/g;
 
 		while(nextRow = ptrn.exec(str)) {
-			console.log(nextRow);
+			// Check if row has array
+			if (nextRow[0].search(':') != -1) {
+				var vals = nextRow[2].split(';'),
+					valsToArr = [],
+					nextVal;
+
+				for(var j = 0, s = vals.length; j < s; j++) {
+					// Build a object from every row from the array with commaColonSON function
+					nextVal = commaColonSON(vals[j]);
+
+					if (nextVal) valsToArr.push(nextVal);
+				}
+
+				res[nextRow[1]] = valsToArr;
+			}
+			
+			/*
+			 * nextRow[2] will be contain a value from pair key-value, 
+			 * but with leading ',', so cut it with slice()
+			 */
+			else {
+				res[nextRow[1]] = nextRow[2].slice(1);
+			}
 		}
 
 		return res;
@@ -69,6 +92,8 @@
 	console.log(commaColonSON('17,minsk;232,gomel;162,brest;212,vitebsk;1522,grodno;222,mogilev'));
 	console.log(commaColonSON('key')); // is it right? or it should output {key: ''}?
 
-	console.log(commaColonSONAdv(';key,value;key1,value;arrayHere:k1,v1;k2,v2;k3,v3'));
+	console.log('\nTesting ---> Advanced CommaColonSON');
+	console.log(commaColonSONAdv('country,belarus;cities:17,minsk;232,gomel;162,brest;212,vitebsk;1522,grodno;222,mogilev'));
+	console.log(commaColonSONAdv(''));
 
 })();
