@@ -39,6 +39,20 @@
 		return res;
 	}
 
+	function commaColonSONAdv(str) {
+		if (typeof str != 'string') return;
+
+		var res = {},
+			nextRow,
+			ptrn = /(\w+)(:.+|,\w+)/g;
+
+		while(nextRow = ptrn.exec(str)) {
+			console.log(nextRow);
+		}
+
+		return res;
+	}
+
 	// Tests
 	// -- Sum of digits from strings
 	console.log('Testing ---> Sum of digits from strings');
@@ -54,5 +68,7 @@
 	console.log('\nTesting ---> CommaColonSON');
 	console.log(commaColonSON('17,minsk;232,gomel;162,brest;212,vitebsk;1522,grodno;222,mogilev'));
 	console.log(commaColonSON('key')); // is it right? or it should output {key: ''}?
+
+	console.log(commaColonSONAdv(';key,value;key1,value;arrayHere:k1,v1;k2,v2;k3,v3'));
 
 })();
