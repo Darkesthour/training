@@ -66,7 +66,7 @@
 			if (o[p] && typeof o[p] === 'object' && !Array.isArray(o[p])) {
 				_res = this.debehaviorizer(o[p], returnBehaviours);
 				
-				this.insertRes(res, _res, p);
+				this.insertResFromRecursion(res, _res, p);
 
 				// So, res was updated go to the next property
 				continue;
